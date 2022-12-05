@@ -9,7 +9,7 @@ class AnimatedExpandableSliverList<T> extends StatefulWidget {
       this.iconData = Icons.list,
       required this.title});
   final List<T> items;
-  final Widget Function<T>(T) childBuilder;
+  final Widget Function(T) childBuilder;
   final IconData iconData;
   final String title;
   @override
