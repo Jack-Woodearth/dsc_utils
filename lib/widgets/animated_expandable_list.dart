@@ -73,6 +73,9 @@ class _AnimatedExpandableSliverListState<T>
   bool arrowUp = false;
   @override
   Widget build(BuildContext context) {
+    if (_itemsDynamic.isEmpty) {
+      return const SliverToBoxAdapter();
+    }
     return MultiSliver(
       children: [
         StatefulBuilder(builder: (context, update) {
