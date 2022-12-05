@@ -39,6 +39,7 @@ class Home extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           AnimatedExpandableSliverList(
+              iconColor: Colors.blue,
               items: const ['items1', '2', '3'],
               childBuilder: (_) => Text(_),
               title: '555')

@@ -7,11 +7,14 @@ class AnimatedExpandableSliverList<T> extends StatefulWidget {
       required this.items,
       required this.childBuilder,
       this.iconData = Icons.list,
-      required this.title});
+      required this.title,
+      this.iconColor});
   final List<T> items;
   final Widget Function(dynamic) childBuilder;
   final IconData iconData;
   final String title;
+  final Color? iconColor;
+
   @override
   State<AnimatedExpandableSliverList> createState() =>
       _AnimatedExpandableSliverListState();
@@ -74,6 +77,7 @@ class _AnimatedExpandableSliverListState<T>
       children: [
         StatefulBuilder(builder: (context, update) {
           return TitleWithIconSliverList(
+            iconColor: widget.iconColor,
             icon: widget.iconData,
             onTap: () {
               update(() {
