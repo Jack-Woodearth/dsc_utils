@@ -9,7 +9,7 @@ class AnimatedExpandableSliverList<T> extends StatefulWidget {
       this.iconData = Icons.list,
       required this.title});
   final List<T> items;
-  final Widget Function(T) childBuilder;
+  final Widget Function(dynamic) childBuilder;
   final IconData iconData;
   final String title;
   @override
@@ -35,7 +35,7 @@ class _AnimatedExpandableSliverListState<T>
     if (_itemsDynamic.isEmpty) {
       return;
     }
-    var index = _itemsDynamic.length;
+    var index = _itemsDynamic.length - 1;
     _itemsDynamic.removeAt(index);
     _listKey.currentState?.removeItem(
         index, (context, animation) => _buildChild(animation, index));
@@ -95,10 +95,9 @@ class _AnimatedExpandableSliverListState<T>
     );
   }
 
-  SizeTransition _buildChild(Animation<double> animation, int index) {
+  Widget _buildChild(Animation<double> animation, int index) {
     return SizeTransition(
-        sizeFactor: animation,
-        child: widget.childBuilder(_itemsDynamic[index]));
+        sizeFactor: animation, child: widget.childBuilder(_itemsBak[index]));
   }
 }
 
@@ -108,7 +107,7 @@ class TitleWithIconSliverList extends StatelessWidget {
     required this.title,
     required this.icon,
     required this.onTap,
-    this.showArrow = false,
+    this.showArrow = true,
     this.arrowUp = false,
     this.iconColor,
   }) : super(key: key);
@@ -128,6 +127,7 @@ class TitleWithIconSliverList extends StatelessWidget {
                     child: SizedBox(
                       // onTap: onTap,
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Icon(
                             icon,
